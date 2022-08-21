@@ -1,5 +1,5 @@
-- Data Info 
-- Data pre-process
+- Data Info (#data-info)
+- Data pre-process (#data-pre-process)
 	- Moving data 
 	- Making support files of sample tables and sample lists for later use
 	- Fastp - QC, adapter trimming
