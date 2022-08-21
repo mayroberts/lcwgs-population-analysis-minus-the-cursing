@@ -506,7 +506,7 @@ So the previous step was summarize_depth_per_position.R done and now I have file
 	
 Now we use `2.1-summary_stats_plot.mpi` to further summarized stats and plot a histogram (output of read_count.Rmd). We use the histogram which should be a normal distribution (though might have a long tail) to figure out what our min adn max depth should be for the next steps of snp calling and filtering.  
 
-SO: for this part, I did a bunch of test runs of just the "## Design filters for SNP calling " on the head node to adjust the min and max depth values. Apparently this part is kind of eyeballed. We're going for chopping off the end of the distributions to make it a normal distribution looking plot.
+SO: for this part, I did a bunch of test runs of the "## Design filters for SNP calling " bit of the r script on the head node to adjust the min and max depth values. Apparently this part is kind of eyeballed. The aim is to chop off the ends of the `depth_hist` distribution to make it a normal distribution looking plot. `depth_hist` is depth on x axis and # of sites on the y-axis so it shows you a distribution of how many sites have 0 coverage (a lot), how many have 50x coverage, how many have 300x....etc. It ends you looking kind of like a normal distribution except for the front end and tail end - so we chop it off to make a nice normal distribution. Why? Haven't wrapped my head around that yet... 
 
  `2.1-summary_stats_plot.mpi` This calls on the R script 
  
@@ -633,7 +633,7 @@ SO: for this part, I did a bunch of test runs of just the "## Design filters for
 
 	dev.off()
 
-Now we call gloabal (for all samples regardless of population) snps using the snps we determined in previous step\
+Now we call global (for all samples) snps using the snp filter parameters determined in previous step \
 
 `1-call_global_snps_all.mpi`
 
@@ -645,25 +645,26 @@ Now we call gloabal (for all samples regardless of population) snps using the sn
 	#SBATCH --mail-type=ALL
 	#SBATCH --mail-user=mabrober@ucsc.edu
 	#SBATCH --time=15-00:00:00
-	#SBATCH --ntasks=1
+	#SBATCH --partition 128x24
 	#SBATCH --mem=120GB   #
+	#SBATCH -n 24
 
-	## This script is used to call SNPs using angsd
+	## This script is used to call global SNPs using angsd
 	module load angsd
 
 	BAMLIST=dedup_bam_paths.tsv # Path to textfile listing bamfiles to include in global SNP calling with absolute paths
 	LIST_DIR=/hb/groups/bernardi_lab/may/DTR/population-analysis/sample_lists/$BAMLIST
 	#POPSLIST=populations.txt
-	BASEDIR=/hb/groups/bernardi_lab/may/DTR/population-analysis/ # Path to the base directory where output files will be written to a subdirectory named "angsd/". An example for the Greenland cod data is: /workdir/cod/greenland-cod/
+	BASEDIR=/hb/groups/bernardi_lab/may/DTR/population-analysis/ # Path to the base directory where output files will be written to a subdirectory named "angsd/".
 	REFERENCE=/hb/groups/bernardi_lab/may/DTR/DTRgenome/genome_annot/genome/kuro_filt_s500.fasta # Path to reference genome
-	MINDP=100 # Minimum depth filter 
-	MAXDP=590 # Maximum depth filter 
-	MININD=13 #10% of individuals
-	MINQ=20  #Minimum quality filter #The minimum base quality score
-	MINMAF=0.5 #Minimum minor allele frequency filter
+	MINDP=100 #Minimum combined sequencing depth (MINDP), e.g. 0.33 x number of individuals # Minimum depth filter
+	MAXDP=590 #MININ x estimated coverage # Maximum depth filter #maxdepth filter #Maximum combined sequencing depth across all individuals, e.g = mean depth + 4 s.d.
+	MININD=6 #10%  or #2/3 the lowest n of pop # Minimum individual filter - a read has to be present in, e.g. 10% of individuals
+	MINQ=20  #Minimum quality filter #The minimum base quality score # Minimum quality filter
+	MINMAF=0.5 #Minimum minor allele frequency filter        ###
 	MINMAPQ=20 ### Minimum mapping quality (alignment score) filter, default value is 20
 	EXTRA_ARG='-remove_bads 1 -only_proper_pairs 1 -C 50' # Extra arguments when running ANGSD, default value is '-remove_bads 1 -only_proper_pairs 1 -C 50'
-	#THREADS=${11:-8} # Number of parallel threads to use, default value is 8.
+	THREADS=24 # Number of parallel threads to use, default value is 8.
 	#-SNP_pval      1.000000        (Remove sites with a pvalue larger)
 
 
@@ -679,6 +680,7 @@ Now we call gloabal (for all samples regardless of population) snps using the sn
 		-setMinDepth $MINDP -setMaxDepth $MAXDP -minInd $MININD \
 		-minQ $MINQ -minMapQ $MINMAPQ \
 		-SNP_pval 1e-6 -minMaf $MINMAF \
+		-P $THREADS
 		$EXTRA_ARG
 		>& $BASEDIR'angsd/'$OUTBASE'.log'
 
