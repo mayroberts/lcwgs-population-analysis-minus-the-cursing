@@ -1,4 +1,4 @@
-# Stage 1: Data preprocessing\
+# Stage 1: Data pre-processing
 Low coverage whole genome sequencing analysis journey...all the nitty gritty 'cause we're learnin'\
 All work run through slurm/university cluster\
 This is version # 2.6k
