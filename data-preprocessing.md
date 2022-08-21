@@ -1,16 +1,17 @@
+# Stage 1: Data preprocessing\
+Low coverage whole genome sequencing analysis journey...all the nitty gritty 'cause we're learnin'\
+All work run through slurm/university cluster\
+This is version # 2.6k
+
 - [Data Info](#data-info)
 - [Data pre-process](#data-pre-process)
 	- [Moving data](#Gather-sequences)
 	- [Making support files of sample tables and sample lists for later use](#Create-sample-table-and-sample-lists)
 	- [Fastp - QC, adapter trimming](#Fastp---QC,-adapter-trimming)
 	- [Map, filter, reindex, reads](#Map-and-filter-reads)
-	- [Merge replicate libraries if you got 'em]
-	- [Deduplicate and clip overlapping portions of reads and reindex]
-	- [Calculate coverage and determine appropriate snp calling parameters]
-
-Low coverage whole genome sequencing analysis journey...all the nitty gritty 'cause we're learnin'\
-All work run through slurm/university cluster\
-This is version # 2.6k
+	- [Merge replicate libraries if you got 'em](#Merge-replicate-libraries-of-samples)
+	- [Deduplicate and clip overlapping portions of reads and reindex](#Deduplicate-and-clip-overlapping-portions-of-reads)
+	- [Calculate coverage and determine appropriate snp calling parameters](#Calculate-coverage)
 
 # Data Info
 Low coverage data of 120+ samples of fish in 12 populations around the Pacific\
@@ -163,6 +164,7 @@ This will pull together and summarize all the reports into one pretty html repor
 ## Map and filter reads
 Bowtie2 http://bowtie-bio.sourceforge.net/bowtie2/manual.shtml#the-bowtie2-build-indexer\
 ### Index reference bowtie2-build
+Before we map the reads to the reference genome, we index them
 runtime:17min\
 `1-bowtie_index.mpi`
 
@@ -285,8 +287,8 @@ Run time : ~2 hours to merge over ~110 files into ~30\
         cd /hb/groups/bernardi_lab/may/DTR/population-analysis/1-mapnfilter/bams/
         OUTDIR=/hb/groups/bernardi_lab/may/DTR/population-analysis/1-mapnfilter/merge_test/
         #file=("BAK12_BAK" "BAK13_BAK" "FAL02_FAL" "FAL04_FAL" "FAL05_FAL" "FAL06_FAL" "FAL07_FAL""IRI07_IRI" "IRI08_IRI" "IRI09_IRI" "IRI13_IRI" "IRI16_IRI" "KIN05_KIN" "KIN08_KIN" "KIN06_KIN" "MOO01_MOO" "MOO04_MOO" "MOO05_MOO" "MOO06_MOO" "MOO07_MOO" "OOUR01_OKI" "OOUR01_OKI" "OZPA03_OKI" "OZPA04_OKI" "PHI05_PHI" "PHI06_PHI" "PHI07_PHI") #list file name groupings here #must do "OZPA07_OKI" still
-        #file=("FAL07_FAL")
-        file=("MOO07_MOO")
+        #file=("FAL07_FAL") #fix
+        file=("MOO07_MOO")  #another fix
 	
         for i in ${file[@]};   #for all items in $file
         do
@@ -299,7 +301,7 @@ Run time : ~2 hours to merge over ~110 files into ~30\
         done
 
 ## Deduplicate and clip overlapping portions of reads
-Runtime: damn, deleted the email\
+Runtime: damn, deleted the email with the info I guess\
 '5-dedup_clip.mpi'
 
         #!/bin/bash
