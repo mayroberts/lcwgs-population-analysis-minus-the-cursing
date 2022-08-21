@@ -19,7 +19,7 @@ Now we call global (for all samples) snps using those snp filter parameters \
 	## This script is used to call global SNPs using angsd
 	module load angsd
 
-	BAMLIST=dedup_bam.tsv # Path to textfile listing bamfiles to include in global SNP calling with absolute paths
+	BAMLIST=DTR_dedup_bam.tsv # Name of tsv with list of paths to bamfiles to include in global SNP calling 
 	LIST_DIR=/hb/groups/bernardi_lab/may/DTR/population-analysis/sample_lists/$BAMLIST
 	BASEDIR=/hb/groups/bernardi_lab/may/DTR/population-analysis/ # Path to the base directory where output files will be written to a subdirectory named "angsd/".
 	REFERENCE=/hb/groups/bernardi_lab/may/DTR/DTRgenome/genome_annot/genome/kuro_filt_s500.fasta # Path to reference genome
