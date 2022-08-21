@@ -1,5 +1,6 @@
 # Call global SNPs
-Now we call global (for all samples) snps using the snp filter parameters determined in previous step \
+Okay so we figured out what our parameters for min depth (MINDP), max depth (MAXDP) should be in previous step\
+Now we call global (for all samples) snps using those snp filter parameters \
 
 `1-call_global_snps_all.mpi`
 
@@ -29,9 +30,9 @@ Now we call global (for all samples) snps using the snp filter parameters determ
 	MINQ=20  #Minimum quality filter #The minimum base quality score # Minimum quality filter
 	MINMAF=0.5 #Minimum minor allele frequency filter
 	MINMAPQ=20 ### Minimum mapping quality (alignment score) filter, default value is 20
-	EXTRA_ARG='-remove_bads 1 -only_proper_pairs 1 -C 50' # Extra arguments when running ANGSD, default value is '-remove_bads 1 -only_proper_pairs 1 -C 50'
+	EXTRA_ARG='-remove_bads 1 -only_proper_pairs 1 -C 50' # Extra arguments when running ANGSD - these are default
 	THREADS=24 # Number of parallel threads to use, default value is 8.
-	#-SNP_pval      1.000000        (Remove sites with a pvalue larger)
+	#-SNP_pval # (Remove sites with a pvalue larger)
 
 
 	## Extract the name of the bam list (excluding path and suffix)
