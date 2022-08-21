@@ -152,7 +152,7 @@ Can't remember if I tried making this an array - would be good here though if po
                 -R $OUT_DIR/${FILES}fastp_report\
 
         done
-        
+### Mulitqc - can't enough beautiful things about this program       
 Once `fastp` is done, go to the `reports_html` directory where all the individual .html files were output to (/hb/groups/bernardi_lab/may/data/pop_data/lcWGS_data/reports_fastp/html_reports). Then,
 
     module load miniconda3.9
