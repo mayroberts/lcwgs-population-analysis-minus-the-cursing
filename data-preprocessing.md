@@ -1,6 +1,6 @@
 Low coverage whole genome sequencing analysis journey...all the nitty gritty 'cause we're learnin'\
 All work run through slurm/university cluster\
-This is version # 2.6k\
+This is version # 2.6k
 
 # Data Info
 Low coverage data of 120+ samples of fish in 12 populations around the Pacific\
