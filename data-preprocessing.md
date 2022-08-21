@@ -11,7 +11,7 @@ This is version # 2.6k
 	- [Map, filter, reindex, reads](#Map-and-filter-reads)
 	- [Merge replicate libraries if you got 'em](#Merge-replicate-libraries-of-samples)
 	- [Deduplicate and clip overlapping portions of reads and reindex](#Deduplicate-and-clip-overlapping-portions-of-reads)
-	- [Calculate coverage and determine appropriate snp calling parameters](#Calculate-coverage)
+	- [Calculate coverage and determine appropriate snp calling parameters](#Calculate-final-coverage)
 
 # Data Info
 Low coverage data of 120+ samples of fish in 12 populations around the Pacific\
