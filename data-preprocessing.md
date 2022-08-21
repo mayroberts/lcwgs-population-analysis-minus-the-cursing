@@ -1,12 +1,12 @@
-- Data Info(#data-info)
-- Data pre-process(#data-pre-process)
-	- Moving data 
-	- Making support files of sample tables and sample lists for later use
-	- Fastp - QC, adapter trimming
-	- Map, filter, index, reads
-	- Merge replicate libraries if you got 'em
-	- Deduplicate and clip overlapping portions of reads and reindex
-	- Calculate coverage and determine appropriate snp calling parameters
+- [Data Info](#data-info)
+- [Data pre-process](#data-pre-process)
+	- [Moving data](#Gather-sequences)
+	- [Making support files of sample tables and sample lists for later use](#Create-sample-table-and-sample-lists)
+	- [Fastp - QC, adapter trimming](#Fastp---QC,-adapter-trimming)
+	- [Map, filter, reindex, reads](#Map-and-filter-reads)
+	- [Merge replicate libraries if you got 'em]
+	- [Deduplicate and clip overlapping portions of reads and reindex]
+	- [Calculate coverage and determine appropriate snp calling parameters]
 
 Low coverage whole genome sequencing analysis journey...all the nitty gritty 'cause we're learnin'\
 All work run through slurm/university cluster\
