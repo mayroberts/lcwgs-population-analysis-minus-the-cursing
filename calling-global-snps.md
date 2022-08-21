@@ -19,14 +19,13 @@ Now we call global (for all samples) snps using those snp filter parameters \
 	## This script is used to call global SNPs using angsd
 	module load angsd
 
-	BAMLIST=dedup_bam_paths.tsv # Path to textfile listing bamfiles to include in global SNP calling with absolute paths
+	BAMLIST=dedup_bam.tsv # Path to textfile listing bamfiles to include in global SNP calling with absolute paths
 	LIST_DIR=/hb/groups/bernardi_lab/may/DTR/population-analysis/sample_lists/$BAMLIST
-	#POPSLIST=populations.txt
 	BASEDIR=/hb/groups/bernardi_lab/may/DTR/population-analysis/ # Path to the base directory where output files will be written to a subdirectory named "angsd/".
 	REFERENCE=/hb/groups/bernardi_lab/may/DTR/DTRgenome/genome_annot/genome/kuro_filt_s500.fasta # Path to reference genome
 	MINDP=100 #Minimum combined sequencing depth (MINDP), e.g. 0.33 x number of individuals # Minimum depth filter
 	MAXDP=590 #MININ x estimated coverage # Maximum depth filter #maxdepth filter #Maximum combined sequencing depth across all individuals, e.g = mean depth + 4 s.d.
-	MININD=6 #10%  or #2/3 the lowest n of pop # Minimum individual filter - a read has to be present in, e.g. 10% of individuals
+	MININD=13 #10% of all samples # Minimum individual filter - a read has to be present in, e.g. 10% of individuals
 	MINQ=20  #Minimum quality filter #The minimum base quality score # Minimum quality filter
 	MINMAF=0.5 #Minimum minor allele frequency filter
 	MINMAPQ=20 ### Minimum mapping quality (alignment score) filter, default value is 20
