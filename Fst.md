@@ -1,7 +1,7 @@
 # Fst estimates - angsd
 http://www.popgen.dk/angsd/index.php/Fst \
 For estimating per SNP Fst and its genome average
-* Had to install my own angsd conda here, for some reasone the hummingbird wide version did not have realSFS*
+*Had to install my own angsd conda here, for some reasone the hummingbird wide version did not have realSFS*
 
         #!/bin/bash
 
