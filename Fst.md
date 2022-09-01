@@ -71,7 +71,7 @@ The output files for each pairwise comparison should be some thing like:\
         OMA_PHI_global_snp_list_DTR_dedup_bams_mindp100_maxdp590_minind13_minq20_popminind6.fst
 Some notes about some of these:\
 - the headers for the `.fst` file should be:\
-        chromosome_name position alpha beta fst\
+        chromosome_name position alpha beta fst
 - the headers for the `average_fst.txt` should be * I THINK but and just deducing from clues here and there*\
-        unweighted_avg_fst weighted_avg_fst\
+        unweighted_avg_fst weighted_avg_fst
         
