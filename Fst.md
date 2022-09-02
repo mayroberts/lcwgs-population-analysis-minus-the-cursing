@@ -3,6 +3,8 @@ http://www.popgen.dk/angsd/index.php/Fst \
 For estimating per SNP Fst and its genome average\
 *Had to install my own angsd conda here, for some reasone the hummingbird wide version did not have realSFS*
 
+Runtime:4h8m
+
         #!/bin/bash
 
         #SBATCH --job-name angsd-fst
