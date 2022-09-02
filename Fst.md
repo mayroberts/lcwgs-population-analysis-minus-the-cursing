@@ -69,8 +69,8 @@ The output files for each pairwise comparison should be some thing like:\
         OMA_PHI_global_snp_list_DTR_dedup_bams_mindp100_maxdp590_minind13_minq20_popminind6.alpha_beta.txt
         OMA_PHI_global_snp_list_DTR_dedup_bams_mindp100_maxdp590_minind13_minq20_popminind6.average_fst.txt
         OMA_PHI_global_snp_list_DTR_dedup_bams_mindp100_maxdp590_minind13_minq20_popminind6.fst
-Some notes about some of these:\
-- the headers for the `.fst` file should be:\
+Some IMPORTANT notes about some of these that angsd doesn't deem fit to include on their wiki:\
+- the headers for the `.fst` (output of `realSFS fst print`)  file should be:\
 
         `chromosome_name` `position` `alpha` `beta` `fst`
         
@@ -79,3 +79,5 @@ Some notes about some of these:\
         `unweighted_avg_fst` `weighted_avg_fst`
         
 - For the avg_fst we want to use weighted_avg_fst(i. e. ratio of averages) (based on Bhatia 2013 https://genome.cshlp.org/content/23/9/1514.full.pdf)\
+
+And then, because I gave up trying to get my code to work pullling all the files together to tabulate the output I manual created my fst table in excel because, 
