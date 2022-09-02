@@ -70,15 +70,15 @@ The output files for each pairwise comparison should be some thing like:\
         OMA_PHI_global_snp_list_DTR_dedup_bams_mindp100_maxdp590_minind13_minq20_popminind6.average_fst.txt
         OMA_PHI_global_snp_list_DTR_dedup_bams_mindp100_maxdp590_minind13_minq20_popminind6.fst
 Some IMPORTANT notes about some of these that angsd doesn't deem fit to include on their wiki:\
-- the headers for the `.fst` (output of `realSFS fst print`)  file should be:\
+The headers for the `.fst` (output of `realSFS fst print`)  file should be:\
 
         `chromosome_name` `position` `alpha` `beta` `fst`
-        
-- the headers for the `average_fst.txt` (output of `realSFS fst stat`) should be * I'm pretty sure - based on clues from here, there, and the depths of forum convos *\
+This shows the per site Fst values        
 
-        `unweighted_avg_fst` `weighted_avg_fst`
-        
-- For the avg_fst we want to use weighted_avg_fst(i. e. ratio of averages) (based on Bhatia 2013 https://genome.cshlp.org/content/23/9/1514.full.pdf)\
+The headers for the `average_fst.txt` (output of `realSFS fst stat`) should be * I'm pretty sure - based on clues from here, there, and the depths of forum convos *\
 
-And then, because I gave up trying to get my code to work pullling all the files together to tabulate the output I manually created my fst table in excel lol
+        `unweighted_avg_fst` `weighted_avg_fst`        
+For the avg_fst we want to use weighted_avg_fst(i. e. ratio of averages) (based on Bhatia 2013 https://genome.cshlp.org/content/23/9/1514.full.pdf)\
+
+And then, because I gave up trying to get my code to work pullling all the files together to tabulate the output I manually created my fst table in excel  using the weighted average fst
 
