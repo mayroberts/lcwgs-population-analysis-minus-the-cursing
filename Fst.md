@@ -74,7 +74,7 @@ Some notes about some of these:\
 
         `chromosome_name` `position` `alpha` `beta` `fst`
         
-- the headers for the `average_fst.txt` should be * I THINK but and just deducing from clues here and there*\
+- the headers for the `average_fst.txt` should be * I'm pretty sure - based on clues from here, there, and the depths of forum convos *\
 
         `unweighted_avg_fst` `weighted_avg_fst`
         
