@@ -78,4 +78,4 @@ Some notes about some of these:\
 
         `unweighted_avg_fst` `weighted_avg_fst`
         
-- we want to use weighted_avg_fst(i. e. ratio of averages) (based on Bhatia 2013 https://genome.cshlp.org/content/23/9/1514.full.pdf)\
+- For the avg_fst we want to use weighted_avg_fst(i. e. ratio of averages) (based on Bhatia 2013 https://genome.cshlp.org/content/23/9/1514.full.pdf)\
