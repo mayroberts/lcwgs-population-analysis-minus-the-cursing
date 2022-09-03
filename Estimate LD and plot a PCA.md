@@ -1,0 +1,53 @@
+# Estimate LD
+From: https://github.com/nt246/lcwgs-guide-tutorial/blob/main/tutorial3_ld_popstructure/markdowns/ld.md
+The estimation of linkage disequilibrium (LD) has important applications, e.g. for inference of population size, demographic history, selection, and for the discovery of structural variants. In addition, since many downstream analyses make assumptions about the independence of genomic loci, LD estimates are essential for trimming the list of loci to be included in these analyses (LD pruning).
+
+To calculate n_sites I 
+
+	zcat DTR_dedup_bams_mindp100_maxdp590_minind13_minq20.beagle.gz |wc -l
+	
+Which gave me 22573847 - because my beagle file has a header I subtract 1 from that. You could do this with your .pos file too since both files have a row for each snp (+ a header). 
+
+`ngsLD.mpi`
+
+		#!/bin/bash
+
+		#SBATCH --job-name ngsld
+		#SBATCH --output %A_ngsld.out
+		#SBATCH --error %A_ngsld.err
+		#SBATCH --mail-type=ALL
+		#SBATCH --mail-user=mabrober@ucsc.edu
+		#SBATCH --time=15-00:00:00
+		#SBATCH --partition=128x24
+		#SBATCH --nodes=1
+		#SBATCH --time=12-00:00:00
+		#SBATCH --mem= 120GB
+		#SBATCH --ntasks-per-node=24
+
+		BASEDIR=/hb/groups/bernardi_lab/may/DTR/population-analysis/angsd/
+		BASENAME=DTR_dedup_bams_mindp100_maxdp590_minind13_minq20
+		BEAGLE=$BASEDIR/DTR_dedup_bams_mindp100_maxdp590_minind13_minq20.beagle.gz
+		POS=$BASEDIR/DTR_dedup_bams_mindp100_maxdp590_minind13_minq20.pos.gz
+
+		module load ngsLD
+
+		ngsLD \
+		--geno $BEAGLE \
+		--posH $POS \
+		--probs \
+		--n_ind 132 \
+		--n_sites 22573846 \
+		--max_kb_dist 0 \
+		--n_threads 24 \
+		--outH ${BASENAME}.ld
+
+		#--n_threads 24 \
+
+		# Options:
+		# --probs: specification of whether the input is genotype probabilities (likelihoods or posteriors)?
+		# --n_ind INT: sample size (number of individuals).
+		# --n_sites INT: total number of sites.
+		# --max_kb_dist DOUBLE: maximum distance between SNPs (in Kb) to calculate LD. Set to 0(zero) to disable filter. [100]
+		# --max_snp_dist INT: maximum distance between SNPs (in number of SNPs) to calculate LD. Set to 0 (zero) to disable filter. [0]
+		# --n_threads INT: number of threads to use. [1]
+		# --out FILE: output file name. [stdout]
