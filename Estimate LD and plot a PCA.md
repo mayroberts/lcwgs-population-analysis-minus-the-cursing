@@ -24,27 +24,29 @@ Which gave me 22573847 - because my beagle file has a header I subtract 1 from t
 		#SBATCH --mem= 120GB
 		#SBATCH --ntasks-per-node=24
 
+		#Muh input
 		BASEDIR=/hb/groups/bernardi_lab/may/DTR/population-analysis/angsd/
 		BASENAME=DTR_dedup_bams_mindp100_maxdp590_minind13_minq20
 		BEAGLE=$BASEDIR/DTR_dedup_bams_mindp100_maxdp590_minind13_minq20.beagle.gz
 		POS=$BASEDIR/DTR_dedup_bams_mindp100_maxdp590_minind13_minq20.pos.gz
-
+		N_IND=132
+		N_SITES=22573846
+		
+		#Turn it on!
 		module load ngsLD
 
+		#Runit
 		ngsLD \
 		--geno $BEAGLE \
 		--posH $POS \
 		--probs \
-		--n_ind 132 \
-		--n_sites 22573846 \
+		--n_ind $N_IND \
+		--n_sites $N_SITES \
 		--max_kb_dist 0 \
-		--n_threads 24 \
 		--outH ${BASENAME}.ld
 
-		#--n_threads 24 \
-
 		# Options:
-		# --probs: specification of whether the input is genotype probabilities (likelihoods or posteriors)?
+		# --probs: just says the input is genotype probabilities (likelihoods or posteriors)?
 		# --n_ind INT: sample size (number of individuals).
 		# --n_sites INT: total number of sites.
 		# --max_kb_dist DOUBLE: maximum distance between SNPs (in Kb) to calculate LD. Set to 0(zero) to disable filter. [100]
