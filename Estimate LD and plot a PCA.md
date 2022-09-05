@@ -121,5 +121,13 @@ Now we should have a working pcangsd program\
 		elif [ $ANALYSIS = selection ]; then
 			$PCANGSD --beagle $BEAGLE --selection --minMaf $MINMAF --threads 16 -o $BASEDIR'pcangsd/pcangsd_'$PREFIX --sites_sav
 		fi
+
+Output files from this:
+
+	pcangsd_DTR_dedup_bams_mindp100_maxdp590_minind13_minq20.args
+	pcangsd_DTR_dedup_bams_mindp100_maxdp590_minind13_minq20.cov
+	pcangsd_DTR_dedup_bams_mindp100_maxdp590_minind13_minq20.selection.npy
+	pcangsd_DTR_dedup_bams_mindp100_maxdp590_minind13_minq20.sites
+	
 ## Plot PCA
 
