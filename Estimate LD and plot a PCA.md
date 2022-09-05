@@ -1,5 +1,5 @@
 - [Estimate LD](#Estimate-LD)
-- [PCA](#pca)
+- [PCA](#pca-by-population)
 	-[selection]
 	-[pca]
 	
