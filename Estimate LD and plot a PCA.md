@@ -84,7 +84,7 @@ Then we create the environment, activate it, and git clone and build:
 	
 Now we should have a working pcangsd program\
 
-# Run selection 
+## Run selection
 `selection.mpi`
 
 		#!/bin/bash
@@ -121,3 +121,5 @@ Now we should have a working pcangsd program\
 		elif [ $ANALYSIS = selection ]; then
 			$PCANGSD --beagle $BEAGLE --selection --minMaf $MINMAF --threads 16 -o $BASEDIR'pcangsd/pcangsd_'$PREFIX --sites_sav
 		fi
+## Plot PCA
+
