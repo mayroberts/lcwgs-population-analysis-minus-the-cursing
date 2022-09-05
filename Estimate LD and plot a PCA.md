@@ -1,4 +1,4 @@
-# Estimate LD
+# Estimate LD *STILL HAVE NOT BEEN ABLE TO GET THIS TO RUN* 
 From: https://github.com/nt246/lcwgs-guide-tutorial/blob/main/tutorial3_ld_popstructure/markdowns/ld.md
 The estimation of linkage disequilibrium (LD) has important applications, e.g. for inference of population size, demographic history, selection, and for the discovery of structural variants. In addition, since many downstream analyses make assumptions about the independence of genomic loci, LD estimates are essential for trimming the list of loci to be included in these analyses (LD pruning).
 
@@ -53,3 +53,32 @@ Which gave me 22573847 - because my beagle file has a header I subtract 1 from t
 		# --max_snp_dist INT: maximum distance between SNPs (in number of SNPs) to calculate LD. Set to 0 (zero) to disable filter. [0]
 		# --n_threads INT: number of threads to use. [1]
 		# --out FILE: output file name. [stdout]
+
+# PCA by population
+Had a bit of a time getting this to run, turned out I just needed to re intall pcangsd. Since there's no simple conda install command available for this Here's how to do that (info from https://github.com/Rosemeis/pcangsd and https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html#create-env-from-file)
+
+	cd /hb/home/mabrober/programs
+	mkdir pcangsd
+	vim environment.yml
+	
+From the pcangsd page, open the `environment.yml` to see what dependencies are required. Basically you need this .yml file in the directory. It looks like this:
+
+	name: pcangsd
+	channels:
+	    - defaults
+	dependencies:
+	    - python>=3.6
+	    - numpy
+	    - scipy
+	    - cython
+	    
+Then we create the environment, activate it, and git clone and build:
+	
+	conda env create -f environment.yml
+	conda activate pcangsd
+	git clone https://github.com/Rosemeis/pcangsd.git
+	cd pcangsd/
+	python setup.py build_ext --inplace
+	pip3 install -e .
+	
+Now we should have a working pcangsd program\
