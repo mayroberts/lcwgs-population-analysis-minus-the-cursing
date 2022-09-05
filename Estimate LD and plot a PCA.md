@@ -1,7 +1,7 @@
 - [Estimate LD](#Estimate-LD)
 - [PCA](#pca-by-population)
 	-[Load PCAngsd](#load-pcangsd)
-	-[selection]
+	-[selection](#run-selection)
 	-[pca]
 	
 # Estimate LD 
