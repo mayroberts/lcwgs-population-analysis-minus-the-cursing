@@ -1,4 +1,10 @@
-# Estimate LD *STILL HAVE NOT BEEN ABLE TO GET THIS TO RUN* 
+- [Estimate LD](#Estimate-LD)
+- [PCA](#pca)
+	-[selection]
+	-[pca]
+	
+# Estimate LD 
+### *STILL HAVE NOT BEEN ABLE TO GET THIS TO RUN* 
 From: https://github.com/nt246/lcwgs-guide-tutorial/blob/main/tutorial3_ld_popstructure/markdowns/ld.md
 The estimation of linkage disequilibrium (LD) has important applications, e.g. for inference of population size, demographic history, selection, and for the discovery of structural variants. In addition, since many downstream analyses make assumptions about the independence of genomic loci, LD estimates are essential for trimming the list of loci to be included in these analyses (LD pruning).
 
