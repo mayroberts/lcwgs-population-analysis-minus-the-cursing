@@ -55,6 +55,7 @@ Which gave me 22573847 - because my beagle file has a header I subtract 1 from t
 		# --out FILE: output file name. [stdout]
 
 # PCA by population
+### Load pcangsd
 Had a bit of a time getting this to run, turned out I just needed to re intall pcangsd. Since there's no simple conda install command available for this Here's how to do that (info from https://github.com/Rosemeis/pcangsd and https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html#create-env-from-file)
 
 	cd /hb/home/mabrober/programs
@@ -82,3 +83,41 @@ Then we create the environment, activate it, and git clone and build:
 	pip3 install -e .
 	
 Now we should have a working pcangsd program\
+
+# Run selection 
+`selection.mpi`
+
+		#!/bin/bash
+
+		#SBATCH --job-name selection
+		#SBATCH --output %A_selection.out
+		#SBATCH --error %A_selection.err
+		#SBATCH --mail-type=ALL
+		#SBATCH --mail-user=mabrober@ucsc.edu
+		#SBATCH --time=15-00:00:00
+		#SBATCH --partition=128x24
+		#SBATCH --nodes=1
+		#SBATCH --time=12-00:00:00
+		#SBATCH --mem= 128GB
+		#SBATCH --ntasks-per-node=24
+
+		## This script is used to run PCA using pcangsd. It can be used to run individual-based PCA, estimate selection. The input is a beagle formatted genotype likelihood file.
+		## https://github.com/Rosemeis/pcangsd
+
+		module load miniconda3.9
+		conda activate pcangsd
+
+		BASEDIR=/hb/groups/bernardi_lab/may/DTR/population-analysis/angsd/
+		BEAGLE=$BASEDIR/DTR_dedup_bams_mindp100_maxdp590_minind13_minq20.beagle.gz
+		MINMAF=0.05
+		ANALYSIS=selection
+		PCANGSD=pcangsd
+
+		PREFIX=`echo $BEAGLE | sed 's/\..*//' | sed -e 's#.*/\(\)#\1#'`
+
+		if [ $ANALYSIS = pca ]; then
+			$PCANGSD --beagle $BEAGLE --minMaf $MINMAF --threads 16 -o $BASEDIR'pcangsd/pcangsd_'$PREFIX
+
+		elif [ $ANALYSIS = selection ]; then
+			$PCANGSD --beagle $BEAGLE --selection --minMaf $MINMAF --threads 16 -o $BASEDIR'pcangsd/pcangsd_'$PREFIX --sites_sav
+		fi
