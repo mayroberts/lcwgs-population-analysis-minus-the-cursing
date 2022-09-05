@@ -138,3 +138,26 @@ Output files from this:
 	
 ## Plot PCA
 
+	library(tidyverse)
+	library(ggplot2)
+	library(cowplot)
+	library(miscTools)
+
+	#directions to PCA function
+	source("/hb/groups/bernardi_lab/may/DTR/population-analysis/angsd/pcangsd/PCA_DAPC_source_functions.r")
+
+	#define variables
+	genome_cov <- read_table("/hb/groups/bernardi_lab/may/DTR/population-analysis/angsd/pcangsd/pcangsd_DTR_dedup_bams_mindp100_maxdp590_minind13_minq20.cov",col_names = FALSE) #covariance matrix
+	sample_table<-read_tsv("/hb/groups/bernardi_lab/may/DTR/population-analysis/sample_lists/clean_sample_table_merged_headers.txt")
+
+	#plot pcas
+	PCA(genome_cov, sample_table$sampleID, as.character(sample_table$population), 1,2, show.ellipse = F, show.line = T, show.label = F)
+	ggsave(paste0('/hb/groups/bernardi_lab/may/DTR/population-analysis/angsd/pcangsd/pca/pca_unpruned_PC1_PC2_pops.png'),height=10, width=8)
+	# current error "Warning messages:
+	1: In cov.trob(df) : Probable convergence failure
+	2: In cov.trob(df) : Probable convergence failure
+	3: In cov.trob(df) : Probable convergence failure
+	Warning messages:
+	1: In cov.trob(df) : Probable convergence failure
+	2: In cov.trob(df) : Probable convergence failure
+	3: In cov.trob(df) : Probable convergence failure"
