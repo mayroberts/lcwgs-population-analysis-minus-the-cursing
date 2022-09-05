@@ -1,8 +1,8 @@
 - [Estimate LD](#Estimate-LD)
-- [PCA](#pca-by-population)\
-	- [Load PCAngsd](#load-pcangsd)\
-	- [selection](#run-selection)\
-	- [pca]
+- [PCA](#pca-by-population)
+	- [Load PCAngsd](#load-pcangsd)
+	- [selection](#run-selection)
+		- [plot pca](#plot-pca)
 	
 # Estimate LD 
 ### *STILL HAVE NOT BEEN ABLE TO GET THIS TO RUN* 
