@@ -1,4 +1,5 @@
 - [Estimate LD](#Estimate-LD)
+- 	[Prep inout](#prep-input-files-and-info)
 - [PCA](#pca-by-population)
 	- [Load PCAngsd](#load-pcangsd)
 	- [selection](#run-selection)
@@ -9,11 +10,20 @@
 From: https://github.com/nt246/lcwgs-guide-tutorial/blob/main/tutorial3_ld_popstructure/markdowns/ld.md
 The estimation of linkage disequilibrium (LD) has important applications, e.g. for inference of population size, demographic history, selection, and for the discovery of structural variants. In addition, since many downstream analyses make assumptions about the independence of genomic loci, LD estimates are essential for trimming the list of loci to be included in these analyses (LD pruning).
 
+### prep input files and info
+The `--geno` file can be prepped by removing the the header and first 3 columns of the `.beagle.gz` file 
+	
+	zcat DTR_dedup_bams_mindp100_maxdp590_minind13_minq20.beagle.gz | sed '1d' | gzip -c > DTR_dedup_bams_mindp100_maxdp590_minind13_minq20.noheader.beagle.gz
+	zcat DTR_dedup_bams_mindp100_maxdp590_minind13_minq20.noheader.beagle.gz | cut -f 4- |  gzip -c > DTR_dedup_bams_mindp100_maxdp590_minind13_minq20_ngsld_formatted.beagle.gz
+	
+The `--pos` file can be prepped by removing the 3rd column of the `.pos.gz` file
+
+	zcat DTR_dedup_bams_mindp100_maxdp590_minind13_minq20.pos.gz | cut -f 1,2 | gzip -c > DTR_dedup_bams_mindp100_maxdp590_minind13_minq20_ngsld_formatted.pos.gz
+	
 To calculate n_sites I 
 
-	zcat DTR_dedup_bams_mindp100_maxdp590_minind13_minq20.beagle.gz |wc -l
-	
-Which gave me 22573847 - because my beagle file has a header I subtract 1 from that. You could do this with your .pos file too since both files have a row for each snp (+ a header). 
+	zcat DTR_dedup_bams_mindp100_maxdp590_minind13_minq20.beagle.gz |wc -l	
+Which gave me 22573846  
 
 `ngsLD.mpi`
 
@@ -34,8 +44,8 @@ Which gave me 22573847 - because my beagle file has a header I subtract 1 from t
 		#Muh input
 		BASEDIR=/hb/groups/bernardi_lab/may/DTR/population-analysis/angsd/
 		BASENAME=DTR_dedup_bams_mindp100_maxdp590_minind13_minq20
-		BEAGLE=$BASEDIR/DTR_dedup_bams_mindp100_maxdp590_minind13_minq20.beagle.gz
-		POS=$BASEDIR/DTR_dedup_bams_mindp100_maxdp590_minind13_minq20.pos.gz
+		BEAGLE=$BASEDIR/DTR_dedup_bams_mindp100_maxdp590_minind13_minq20_ngsld_formatted.beagle.gz
+		POS=$BASEDIR/DTR_dedup_bams_mindp100_maxdp590_minind13_minq20_ngsld_formatted.pos.gz
 		N_IND=132
 		N_SITES=22573846
 		
