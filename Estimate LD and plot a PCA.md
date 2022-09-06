@@ -6,7 +6,7 @@
 		- [plot pca](#plot-pca)
 	
 # Estimate LD 
-### *STILL HAVE NOT BEEN ABLE TO GET THIS TO RUN* 
+### *only works on head node - will run tonight * 
 From: https://github.com/nt246/lcwgs-guide-tutorial/blob/main/tutorial3_ld_popstructure/markdowns/ld.md
 The estimation of linkage disequilibrium (LD) has important applications, e.g. for inference of population size, demographic history, selection, and for the discovery of structural variants. In addition, since many downstream analyses make assumptions about the independence of genomic loci, LD estimates are essential for trimming the list of loci to be included in these analyses (LD pruning).
 
@@ -25,7 +25,7 @@ To calculate n_sites I
 	zcat DTR_dedup_bams_mindp100_maxdp590_minind13_minq20.beagle.gz |wc -l	
 Which gave me 22573846  
 
-`ngsLD.mpi`
+`ngsLD.sh`
 
 		#!/bin/bash
 
