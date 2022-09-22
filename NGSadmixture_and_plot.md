@@ -116,3 +116,40 @@ The r script:
 						ylab="Admixture proportions",
 						main=paste("k=",k))
 		dev.off()
+
+To decide which K to use:
+
+		moduleload miniconda3.9
+		conda activate tidyverse # this is just the conda environment where I store all my R libraries for this project
+		
+		R
+		
+		#read in the data
+		data<-list.files("logs/", pattern = ".log", full.names = T)
+		data
+		#use lapply to read in all our log files at once
+		bigData<-lapply(1:7, FUN = function(i) readLines(data[i])) #1:7 shows how many log files we're working with
+		bigData
+		# find the line that starts with "best like="
+		library(stringr)
+		#this will pull out the line that starts with "b" from each file and return it as a list
+		foundset<-sapply(1:7, FUN= function(x) bigData[[x]][which(str_sub(bigData[[x]], 1, 1) == 'best')])
+		foundset
+		#now lets make a data frame to store info in
+		#make a dataframe with an index 4:10 (corresponds to our K values)
+		logs<-data.frame(K = rep(4:10)) #each=3))
+		#now we need to pull out the first number in the string, we'll do this with the function sub
+		#and add to it our likelihood values
+		logs$like<-as.vector(as.numeric( sub("\\D*(\\d+).*", "\\1", foundset) ))
+		logs
+		> logs
+		   K       like
+		1  4 2220881698
+		2  5 2204894454
+		3  6 2180804670
+		4  7 2311248850   #in this case because we only ran NGSDadmix 1x per k we pick the k with the highest liklihood here
+		5  8 2268724504
+		6  9 2251519492
+		7 10 2189479769
+		#and now we can calculate our delta K and probability
+		tapply(logs$like, logs$K, FUN= function(x) mean(abs(x))/sd(abs(x)))
