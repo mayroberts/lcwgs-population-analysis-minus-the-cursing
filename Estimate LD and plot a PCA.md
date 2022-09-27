@@ -165,7 +165,7 @@ This is run on the head node, it takes 2 secs
 
 	#define variables
 	genome_cov <- read_table("/hb/groups/bernardi_lab/may/DTR/population-analysis/angsd/pcangsd/pcangsd_DTR_dedup_bams_mindp100_maxdp590_minind13_minq20_contrm.cov",col_names = FALSE) #covariance matrix
-	sample_table<-read_tsv("/hb/groups/bernardi_lab/may/DTR/population-analysis/sample_lists/clean_sample_table_merged_headers.txt") #sample table with headers 
+	sample_table<-read_tsv("/hb/groups/bernardi_lab/may/DTR/population-analysis/sample_lists/clean_sample_table_merged_headers.tsv") #sample table with headers 
 
 	#plot pcas
 	PCA(genome_cov, sample_table$sampleID, as.character(sample_table$population), 1,2, show.ellipse = F, show.line = T, show.label = F) #
